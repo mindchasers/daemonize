@@ -242,7 +242,8 @@ class Daemonize(object):
         self.logger.warn("Starting daemon.")
 
         try:
-            self.action(*privileged_action_result)
+            daemon_args = [self.logger] + privileged_action_result
+            self.action(*daemon_args)
         except Exception:
             for line in traceback.format_exc().split("\n"):
                 self.logger.error(line)
